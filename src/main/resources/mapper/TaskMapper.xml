@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xgdjweb.dao.TaskMapper" >
+  <resultMap id="BaseResultMap" type="com.xgdjweb.bean.Task" >
+    <id column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="tasktitle" property="tasktitle" jdbcType="VARCHAR" />
+    <result column="tasktype" property="tasktype" jdbcType="VARCHAR" />
+    <result column="taskcontent" property="taskcontent" jdbcType="VARCHAR" />
+    <result column="isshow" property="isshow" jdbcType="VARCHAR" />
+    <result column="srole" property="srole" jdbcType="VARCHAR" />
+    <result column="releasetime" property="releasetime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="closeperson" property="closeperson" jdbcType="VARCHAR" />
+    <result column="resolver" property="resolver" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tid, tasktitle, tasktype, taskcontent, isshow, srole, releasetime, endtime, publisher, 
+    number, closeperson, resolver
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xgdjweb.bean.TaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from task
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from task
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xgdjweb.bean.TaskExample" >
+    delete from task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xgdjweb.bean.Task" >
+    insert into task (tid, tasktitle, tasktype, 
+      taskcontent, isshow, srole, 
+      releasetime, endtime, publisher, 
+      number, closeperson, resolver
+      )
+    values (#{tid,jdbcType=INTEGER}, #{tasktitle,jdbcType=VARCHAR}, #{tasktype,jdbcType=VARCHAR}, 
+      #{taskcontent,jdbcType=VARCHAR}, #{isshow,jdbcType=VARCHAR}, #{srole,jdbcType=VARCHAR}, 
+      #{releasetime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{publisher,jdbcType=VARCHAR}, 
+      #{number,jdbcType=VARCHAR}, #{closeperson,jdbcType=VARCHAR}, #{resolver,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xgdjweb.bean.Task" >
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="tasktitle != null" >
+        tasktitle,
+      </if>
+      <if test="tasktype != null" >
+        tasktype,
+      </if>
+      <if test="taskcontent != null" >
+        taskcontent,
+      </if>
+      <if test="isshow != null" >
+        isshow,
+      </if>
+      <if test="srole != null" >
+        srole,
+      </if>
+      <if test="releasetime != null" >
+        releasetime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="publisher != null" >
+        publisher,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="closeperson != null" >
+        closeperson,
+      </if>
+      <if test="resolver != null" >
+        resolver,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="tasktitle != null" >
+        #{tasktitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tasktype != null" >
+        #{tasktype,jdbcType=VARCHAR},
+      </if>
+      <if test="taskcontent != null" >
+        #{taskcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=VARCHAR},
+      </if>
+      <if test="srole != null" >
+        #{srole,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="closeperson != null" >
+        #{closeperson,jdbcType=VARCHAR},
+      </if>
+      <if test="resolver != null" >
+        #{resolver,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xgdjweb.bean.TaskExample" resultType="java.lang.Integer" >
+    select count(*) from task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task
+    <set >
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tasktitle != null" >
+        tasktitle = #{record.tasktitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasktype != null" >
+        tasktype = #{record.tasktype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskcontent != null" >
+        taskcontent = #{record.taskcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isshow != null" >
+        isshow = #{record.isshow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srole != null" >
+        srole = #{record.srole,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releasetime != null" >
+        releasetime = #{record.releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.publisher != null" >
+        publisher = #{record.publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.closeperson != null" >
+        closeperson = #{record.closeperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resolver != null" >
+        resolver = #{record.resolver,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task
+    set tid = #{record.tid,jdbcType=INTEGER},
+    tasktitle = #{record.tasktitle,jdbcType=VARCHAR},
+    tasktype = #{record.tasktype,jdbcType=VARCHAR},
+    taskcontent = #{record.taskcontent,jdbcType=VARCHAR},
+    isshow = #{record.isshow,jdbcType=VARCHAR},
+    srole = #{record.srole,jdbcType=VARCHAR},
+    releasetime = #{record.releasetime,jdbcType=TIMESTAMP},
+    endtime = #{record.endtime,jdbcType=TIMESTAMP},
+    publisher = #{record.publisher,jdbcType=VARCHAR},
+    number = #{record.number,jdbcType=VARCHAR},
+    closeperson = #{record.closeperson,jdbcType=VARCHAR},
+    resolver = #{record.resolver,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xgdjweb.bean.Task" >
+    update task
+    <set >
+      <if test="tasktitle != null" >
+        tasktitle = #{tasktitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tasktype != null" >
+        tasktype = #{tasktype,jdbcType=VARCHAR},
+      </if>
+      <if test="taskcontent != null" >
+        taskcontent = #{taskcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        isshow = #{isshow,jdbcType=VARCHAR},
+      </if>
+      <if test="srole != null" >
+        srole = #{srole,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        releasetime = #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publisher != null" >
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="closeperson != null" >
+        closeperson = #{closeperson,jdbcType=VARCHAR},
+      </if>
+      <if test="resolver != null" >
+        resolver = #{resolver,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xgdjweb.bean.Task" >
+    update task
+    set tasktitle = #{tasktitle,jdbcType=VARCHAR},
+      tasktype = #{tasktype,jdbcType=VARCHAR},
+      taskcontent = #{taskcontent,jdbcType=VARCHAR},
+      isshow = #{isshow,jdbcType=VARCHAR},
+      srole = #{srole,jdbcType=VARCHAR},
+      releasetime = #{releasetime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      closeperson = #{closeperson,jdbcType=VARCHAR},
+      resolver = #{resolver,jdbcType=VARCHAR}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <!--  任务管理的多重查询-->
+  <select id="getTaskBySearch" resultType="Map" parameterType="Map">
+    select
+    <include refid="Base_Column_List" />
+    from task
+    <where>
+      <if test="tasktitle != null">
+        and tasktitle like concat('%',#{tasktitle},'%')
+      </if>
+      <if test="srole != null">
+        and srole like concat('%',#{srole},'%')
+      </if>
+      <if test="publisher != null">
+        and publisher like concat('%',#{publisher},'%')
+      </if>
+    </where>
+  </select>
+
+  <!--  任务审核里面的多重查询-->
+  <select id="getTaskByLike" resultType="Map" parameterType="Map">
+    select
+    t.tid,t.number,t.tasktitle, u.snumber,u.username,u.phone,t.endtime
+    from
+    user u,task t where  t.tid = #{tid}
+    <if test="username != null">
+      and u.username like concat('%',#{username},'%')
+    </if>
+    <if test="snumber != null">
+      and u.snumber like concat('%',#{snumber},'%')
+    </if>
+    <if test="phone != null">
+      and u.phone like concat('%',#{phone},'%')
+    </if>
+  </select>
+  <!--  我关闭的任务-->
+  <select id="myClose" resultType="Map" parameterType="Map">
+    select
+        t.tid,t.tasktype,t.tasktitle,t.endtime,t.srole,t.publisher,t.closeperson,t.resolver,a.role
+    from
+        task t,admin a
+    where
+        t.closeperson = a.role
+    and
+        a.id = #{id}
+  </select>
+  <!--  我发布的任务-->
+  <select id="myPublish" resultType="Map" parameterType="Map">
+    select
+        t.tid,t.tasktype,t.tasktitle,t.endtime,t.srole,t.publisher,t.closeperson,t.resolver,a.role
+    from
+        task t,admin a
+    where
+        t.publisher = a.role
+    and
+        a.id = #{id}
+  </select>
+  <!--  派给我的任务-->
+  <select id="sentMe" resultType="Map" parameterType="Map">
+    select
+        t.tid,t.tasktype,t.tasktitle,t.endtime,t.srole,t.publisher,t.closeperson,t.resolver,a.role
+    from
+        task t,admin a
+    where
+        t.srole = a.role
+    and
+        a.id = #{id}
+  </select>
+  <!--  我解决的任务-->
+  <select id="myResolve" parameterType="Map" resultType="Map">
+    select
+        t.tid,t.tasktype,t.tasktitle,t.endtime,t.srole,t.publisher,t.closeperson,t.resolver,a.role
+    from
+        task t,admin a
+    where
+        t.resolver = a.role
+    and
+        a.id = #{id}
+  </select>
+  <!--  移动端指派给用户的任务-->
+  <select id="publishUser" parameterType="Map" resultType="Map">
+  select
+    t.tid,t.tasktitle
+  from
+    task t,user u
+  where
+    u.srole = t.srole
+  and
+    u.sid = #{sid}
+</select>
+  <!--  移动端未完成的任务-->
+  <select id="incompleteTask" parameterType="Map" resultType="Map">
+    select
+    t.tid,t.tasktitle
+  from
+    task t,user u
+  where
+    u.srole = t.srole
+  and
+    u.sid = #{sid}
+  and
+    t.state ="未完成"
+</select>
+  <select id="findTasksBySrole" parameterType="Map" resultType="Map">
+SELECT
+  t.tid,t.tasktitle,t.tasktype,t.taskcontent,t.srole,t.number,t.isshow,t.endtime,t.releasetime,s.id,s.starttime,s.examinetime,s.completetime,s.category,s.examine,s.putton
+FROM
+    task t,taskstatus s
+WHERE
+t.number = s.number AND s.sid = #{sid} and s.category = #{category}
+  </select>
+</mapper>

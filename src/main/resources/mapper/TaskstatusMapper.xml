@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xgdjweb.dao.TaskstatusMapper" >
+  <resultMap id="BaseResultMap" type="com.xgdjweb.bean.Taskstatus" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="completetime" property="completetime" jdbcType="TIMESTAMP" />
+    <result column="examinetime" property="examinetime" jdbcType="TIMESTAMP" />
+    <result column="putton" property="putton" jdbcType="VARCHAR" />
+    <result column="examine" property="examine" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, starttime, completetime, examinetime, putton, examine, state, number, sid, category
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xgdjweb.bean.TaskstatusExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from taskstatus
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from taskstatus
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from taskstatus
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xgdjweb.bean.TaskstatusExample" >
+    delete from taskstatus
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xgdjweb.bean.Taskstatus" >
+    insert into taskstatus (id, starttime, completetime,
+      examinetime, putton, examine,
+      state, number, sid,
+      category)
+    values (#{id,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, #{completetime,jdbcType=TIMESTAMP},
+      #{examinetime,jdbcType=TIMESTAMP}, #{putton,jdbcType=VARCHAR}, #{examine,jdbcType=VARCHAR},
+      #{state,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER},
+      #{category,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xgdjweb.bean.Taskstatus" >
+    insert into taskstatus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="completetime != null" >
+        completetime,
+      </if>
+      <if test="examinetime != null" >
+        examinetime,
+      </if>
+      <if test="putton != null" >
+        putton,
+      </if>
+      <if test="examine != null" >
+        examine,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completetime != null" >
+        #{completetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinetime != null" >
+        #{examinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putton != null" >
+        #{putton,jdbcType=VARCHAR},
+      </if>
+      <if test="examine != null" >
+        #{examine,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xgdjweb.bean.TaskstatusExample" resultType="java.lang.Integer" >
+    select count(*) from taskstatus
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update taskstatus
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null" >
+        starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.completetime != null" >
+        completetime = #{record.completetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examinetime != null" >
+        examinetime = #{record.examinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.putton != null" >
+        putton = #{record.putton,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examine != null" >
+        examine = #{record.examine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.category != null" >
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update taskstatus
+    set id = #{record.id,jdbcType=INTEGER},
+    starttime = #{record.starttime,jdbcType=TIMESTAMP},
+    completetime = #{record.completetime,jdbcType=TIMESTAMP},
+    examinetime = #{record.examinetime,jdbcType=TIMESTAMP},
+    putton = #{record.putton,jdbcType=VARCHAR},
+    examine = #{record.examine,jdbcType=VARCHAR},
+    state = #{record.state,jdbcType=VARCHAR},
+    number = #{record.number,jdbcType=VARCHAR},
+    sid = #{record.sid,jdbcType=INTEGER},
+    category = #{record.category,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xgdjweb.bean.Taskstatus" >
+    update taskstatus
+    <set >
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completetime != null" >
+        completetime = #{completetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinetime != null" >
+        examinetime = #{examinetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putton != null" >
+        putton = #{putton,jdbcType=VARCHAR},
+      </if>
+      <if test="examine != null" >
+        examine = #{examine,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xgdjweb.bean.Taskstatus" >
+    update taskstatus
+    set starttime = #{starttime,jdbcType=TIMESTAMP},
+      completetime = #{completetime,jdbcType=TIMESTAMP},
+      examinetime = #{examinetime,jdbcType=TIMESTAMP},
+      putton = #{putton,jdbcType=VARCHAR},
+      examine = #{examine,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      sid = #{sid,jdbcType=INTEGER},
+      category = #{category,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findTaskstatus" parameterType="Map" resultType="Map">
+    SELECT
+    u.snumber,u.username,u.college,t.examinetime,t.number,t.category,t.state
+    FROM
+    user
+    u,taskstatus t
+    WHERE
+    t.sid = u.sid
+    <if test="snumber != null">
+      and u.snumber like concat('%',#{snumber},'%')
+    </if>
+    <if test="username != null">
+      and u.username like concat('%',#{username},'%')
+    </if>
+    <if test="category != null">
+      and t.category like concat('%',#{category},'%')
+    </if>
+  </select>
+</mapper>

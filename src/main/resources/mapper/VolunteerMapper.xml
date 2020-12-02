@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xgdjweb.dao.VolunteerMapper" >
+  <resultMap id="BaseResultMap" type="com.xgdjweb.bean.Volunteer" >
+    <id column="vid" property="vid" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="volunteername" property="volunteername" jdbcType="VARCHAR" />
+    <result column="vtime" property="vtime" jdbcType="TIMESTAMP" />
+    <result column="neednum" property="neednum" jdbcType="INTEGER" />
+    <result column="applicantsnum" property="applicantsnum" jdbcType="INTEGER" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="cphone" property="cphone" jdbcType="VARCHAR" />
+    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+    <result column="college" property="college" jdbcType="VARCHAR" />
+    <result column="releasetime" property="releasetime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="assemblytime" property="assemblytime" jdbcType="TIMESTAMP" />
+    <result column="collectionplace" property="collectionplace" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    vid, number, volunteername, vtime, neednum, applicantsnum, contacts, cphone, publisher,
+    college, releasetime, endtime, assemblytime, collectionplace, content
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xgdjweb.bean.VolunteerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from volunteer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from volunteer
+    where vid = #{vid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from volunteer
+    where vid = #{vid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xgdjweb.bean.VolunteerExample" >
+    delete from volunteer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xgdjweb.bean.Volunteer" >
+    insert into volunteer (vid, number, volunteername,
+      vtime, neednum, applicantsnum,
+      contacts, cphone, publisher,
+      college, releasetime, endtime,
+      assemblytime, collectionplace, content
+      )
+    values (#{vid,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{volunteername,jdbcType=VARCHAR},
+      #{vtime,jdbcType=TIMESTAMP}, #{neednum,jdbcType=INTEGER}, #{applicantsnum,jdbcType=INTEGER},
+      #{contacts,jdbcType=VARCHAR}, #{cphone,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR},
+      #{college,jdbcType=VARCHAR}, #{releasetime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP},
+      #{assemblytime,jdbcType=TIMESTAMP}, #{collectionplace,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xgdjweb.bean.Volunteer" >
+    insert into volunteer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        vid,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="volunteername != null" >
+        volunteername,
+      </if>
+      <if test="vtime != null" >
+        vtime,
+      </if>
+      <if test="neednum != null" >
+        neednum,
+      </if>
+      <if test="applicantsnum != null" >
+        applicantsnum,
+      </if>
+      <if test="contacts != null" >
+        contacts,
+      </if>
+      <if test="cphone != null" >
+        cphone,
+      </if>
+      <if test="publisher != null" >
+        publisher,
+      </if>
+      <if test="college != null" >
+        college,
+      </if>
+      <if test="releasetime != null" >
+        releasetime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="assemblytime != null" >
+        assemblytime,
+      </if>
+      <if test="collectionplace != null" >
+        collectionplace,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="volunteername != null" >
+        #{volunteername,jdbcType=VARCHAR},
+      </if>
+      <if test="vtime != null" >
+        #{vtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="neednum != null" >
+        #{neednum,jdbcType=INTEGER},
+      </if>
+      <if test="applicantsnum != null" >
+        #{applicantsnum,jdbcType=INTEGER},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="cphone != null" >
+        #{cphone,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assemblytime != null" >
+        #{assemblytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectionplace != null" >
+        #{collectionplace,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xgdjweb.bean.VolunteerExample" resultType="java.lang.Integer" >
+    select count(*) from volunteer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update volunteer
+    <set >
+      <if test="record.vid != null" >
+        vid = #{record.vid,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volunteername != null" >
+        volunteername = #{record.volunteername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vtime != null" >
+        vtime = #{record.vtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.neednum != null" >
+        neednum = #{record.neednum,jdbcType=INTEGER},
+      </if>
+      <if test="record.applicantsnum != null" >
+        applicantsnum = #{record.applicantsnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.contacts != null" >
+        contacts = #{record.contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cphone != null" >
+        cphone = #{record.cphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publisher != null" >
+        publisher = #{record.publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.college != null" >
+        college = #{record.college,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releasetime != null" >
+        releasetime = #{record.releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.assemblytime != null" >
+        assemblytime = #{record.assemblytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.collectionplace != null" >
+        collectionplace = #{record.collectionplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update volunteer
+    set vid = #{record.vid,jdbcType=INTEGER},
+    number = #{record.number,jdbcType=VARCHAR},
+    volunteername = #{record.volunteername,jdbcType=VARCHAR},
+    vtime = #{record.vtime,jdbcType=TIMESTAMP},
+    neednum = #{record.neednum,jdbcType=INTEGER},
+    applicantsnum = #{record.applicantsnum,jdbcType=INTEGER},
+    contacts = #{record.contacts,jdbcType=VARCHAR},
+    cphone = #{record.cphone,jdbcType=VARCHAR},
+    publisher = #{record.publisher,jdbcType=VARCHAR},
+    college = #{record.college,jdbcType=VARCHAR},
+    releasetime = #{record.releasetime,jdbcType=TIMESTAMP},
+    endtime = #{record.endtime,jdbcType=TIMESTAMP},
+    assemblytime = #{record.assemblytime,jdbcType=TIMESTAMP},
+    collectionplace = #{record.collectionplace,jdbcType=VARCHAR},
+    content = #{record.content,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xgdjweb.bean.Volunteer" >
+    update volunteer
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="volunteername != null" >
+        volunteername = #{volunteername,jdbcType=VARCHAR},
+      </if>
+      <if test="vtime != null" >
+        vtime = #{vtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="neednum != null" >
+        neednum = #{neednum,jdbcType=INTEGER},
+      </if>
+      <if test="applicantsnum != null" >
+        applicantsnum = #{applicantsnum,jdbcType=INTEGER},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="cphone != null" >
+        cphone = #{cphone,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null" >
+        releasetime = #{releasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assemblytime != null" >
+        assemblytime = #{assemblytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectionplace != null" >
+        collectionplace = #{collectionplace,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xgdjweb.bean.Volunteer" >
+    update volunteer
+    set number = #{number,jdbcType=VARCHAR},
+      volunteername = #{volunteername,jdbcType=VARCHAR},
+      vtime = #{vtime,jdbcType=TIMESTAMP},
+      neednum = #{neednum,jdbcType=INTEGER},
+      applicantsnum = #{applicantsnum,jdbcType=INTEGER},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      cphone = #{cphone,jdbcType=VARCHAR},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      college = #{college,jdbcType=VARCHAR},
+      releasetime = #{releasetime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      assemblytime = #{assemblytime,jdbcType=TIMESTAMP},
+      collectionplace = #{collectionplace,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <select id="findBySearch" resultType="Map" parameterType="Map">
+    select
+    <include refid="Base_Column_List" />
+    from volunteer
+    where 1 = 1
+    <if test="volunteername != null">
+      and volunteername like concat('%',#{volunteername},'%')
+    </if>
+    <if test="contacts != null">
+      and contacts like concat('%',#{contacts},'%')
+    </if>
+    <if test="college != null">
+      and college like concat('%',#{college},'%')
+    </if>
+    <if test="vstate != null">
+      and vstate like concat('%',#{vstate},'%')
+    </if>
+  </select>
+  <select id="findVoluByLike" resultType="Map" parameterType="Map">
+    select
+    v.number,u.unumber,u.snumber,u.username,u.phone,v.begintime,v.examinetime,v.examine,v.vstate,v.assemblytime,v.collectionplace,v.content
+    from volunteer v,user u
+    where 1 = 1
+    <if test="username != null">
+      and u.username like concat('%',#{username},'%')
+    </if>
+    <if test="snumber != null">
+      and u.snumber like concat('%',#{snumber},'%')
+    </if>
+    <if test="phone != null">
+      and u.phone like concat('%',#{phone},'%')
+    </if>
+    <if test="vstate != null">
+      and v.vstate like concat('%',#{vstate},'%')
+    </if>
+    ORDER BY u.unumber
+  </select>
+</mapper>
