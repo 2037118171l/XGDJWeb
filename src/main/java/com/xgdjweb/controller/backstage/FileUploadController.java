@@ -6,14 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
-=======
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
->>>>>>> b2f9e720d20818178f86064ce3b8e29766351f2e
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -96,13 +89,10 @@ public class FileUploadController {
         ResponseWrapper wrapper = fileUploadService.fileUpload(file);
         return wrapper;
     }
-<<<<<<< HEAD
     @ApiOperation("删除文档")
     @DeleteMapping("delFile")
     public ResponseWrapper deleteFile(@RequestParam(name = "id") Integer id){
         ResponseWrapper wrapper = fileUploadService.deleteFile(id);
         return wrapper;
     }
-=======
->>>>>>> b2f9e720d20818178f86064ce3b8e29766351f2e
 }

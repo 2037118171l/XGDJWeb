@@ -34,9 +34,7 @@ public interface AdvertisementMapper {
     int updateByPrimaryKey(Advertisement record);
 
     List<Advertisement> getAdvertisementBySearch(String number, String category, String displayorder, String title);
-<<<<<<< HEAD
 
     List<Advertisement> getAdvePicByCategory(String category);
-=======
->>>>>>> b2f9e720d20818178f86064ce3b8e29766351f2e
+
 }

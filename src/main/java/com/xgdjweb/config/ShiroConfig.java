@@ -55,7 +55,6 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/mobile/**", "anon");
         filterChainDefinitionMap.put("/picture/**", "anon");
         filterChainDefinitionMap.put("/html/**", "anon");
-        filterChainDefinitionMap.put("/Users/**", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         //swagger接口权限 开放
         filterChainDefinitionMap.put("/doc.html", "anon");

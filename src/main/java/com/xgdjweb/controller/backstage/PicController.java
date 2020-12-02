@@ -15,17 +15,12 @@ public class PicController {
 
     @Autowired
     PicService picService;
-
     @ApiOperation("查找所有图片信息")
     @GetMapping("/findPic")
-<<<<<<< HEAD
+
     public ResponseWrapper findPic(@RequestParam(name = "pageSize",defaultValue = "10")Integer pageSize,
                                    @RequestParam(name = "pageNum",defaultValue = "1")Integer pageNum){
         ResponseWrapper wrapper = picService.findPic(pageSize,pageNum);
-=======
-    public ResponseWrapper findPic(){
-        ResponseWrapper wrapper = picService.findPic();
->>>>>>> b2f9e720d20818178f86064ce3b8e29766351f2e
         return wrapper;
     }
     @ApiOperation("增加图片")
@@ -42,13 +37,8 @@ public class PicController {
     }
     @ApiOperation("删除图片")
     @DeleteMapping("/deletePic")
-<<<<<<< HEAD
     public ResponseWrapper deletePic(@RequestParam( name = "pid") String pid){
         ResponseWrapper wrapper = picService.deletePic(pid);
-=======
-    public ResponseWrapper deletePic(@RequestParam( name = "pids") String pids){
-        ResponseWrapper wrapper = picService.deletePic(pids);
->>>>>>> b2f9e720d20818178f86064ce3b8e29766351f2e
         return wrapper;
     }
 

@@ -1,4 +1,0 @@
-# druid数据源的配置
-spring:
-  profiles:
-    active: port

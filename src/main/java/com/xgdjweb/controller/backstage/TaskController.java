@@ -162,7 +162,7 @@ public class TaskController {
         ResponseWrapper wrapper = taskService.myResolve(id,pageNum,pageSize);
         return  wrapper;
     }
-<<<<<<< HEAD
+
     @ApiOperation("成长履历")
     @GetMapping("/taskStatus")
     public ResponseWrapper taskStatus(@RequestParam(name = "snumber",required = false)String snumber,
@@ -173,6 +173,5 @@ public class TaskController {
         ResponseWrapper wrapper = taskService.findTaskstatus(snumber,username,category,pageNum,pageSize);
         return wrapper;
     }
-=======
->>>>>>> b2f9e720d20818178f86064ce3b8e29766351f2e
+
 }

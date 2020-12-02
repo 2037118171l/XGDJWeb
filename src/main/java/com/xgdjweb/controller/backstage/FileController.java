@@ -22,14 +22,9 @@ public class FileController {
      */
     @ApiOperation("查询所有文件")
     @GetMapping("/findAllFile")
-<<<<<<< HEAD
     public ResponseWrapper findAllFile(@RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize,
                                        @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum){
         ResponseWrapper wrapper = fileUploadService.findAll(pageSize,pageNum);
-=======
-    public ResponseWrapper findAllFile(){
-        ResponseWrapper wrapper = fileUploadService.findAll();
->>>>>>> b2f9e720d20818178f86064ce3b8e29766351f2e
         return wrapper;
     }
     @ApiOperation("增加文件")

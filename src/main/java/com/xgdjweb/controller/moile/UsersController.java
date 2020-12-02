@@ -5,8 +5,6 @@ import com.xgdjweb.config.ResponseWrapper;
 import com.xgdjweb.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-<<<<<<< HEAD
-import io.swagger.models.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,15 +14,7 @@ import java.util.UUID;
 
 @RestController
 @Api( tags = "移动端用户界面")
-@RequestMapping("/mobile/Users")
-=======
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
-@Api( tags = "移动端用户界面")
 @RequestMapping("/Users")
->>>>>>> b2f9e720d20818178f86064ce3b8e29766351f2e
 public class UsersController {
     @Autowired
     UserService userService;
@@ -55,11 +45,5 @@ public class UsersController {
         ResponseWrapper wrapper = userService.publishUser(sid,pageNum,pageSize);
         return wrapper;
     }
-<<<<<<< HEAD
 
-
-
-
-=======
->>>>>>> b2f9e720d20818178f86064ce3b8e29766351f2e
 }
